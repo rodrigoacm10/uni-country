@@ -1,10 +1,14 @@
+import { fetchCountrys } from "@/lib/fetchCountrys";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Home() {
   return (
-    <div className="w-full bg-dot-black/[0.2] flex justify-center min-h-screen py-32       ">
-      {/* [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] */}
-      <div className="  max-w-[1000px] flex-1 h-full flex flex-col     items-center  ">
+    <div className="w-full  flex justify-center min-h-screen pt-32 pb-20   relative ">
+      <div className="z-10 absolute min-h-screen bg-dot-black/[0.2] top-0 w-full"></div>
+      <div className="z-10 min-h-screen top-0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]  bg-white w-full absolute"></div>
+      {/* [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]  */}
+      <div className="z-20  max-w-[1000px] flex-1 h-full flex flex-col     items-center  ">
         <div className="text-center text-[40px] self-center justify-self-center leading-[44px] font-bold">
           <p> Encontre qualquer pais </p>
           <p>que você pensar</p>
@@ -30,7 +34,25 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="bg-black w-full h-1 mt-40 grid grid-cols-8 justify-items-center gap-1">
+        <div className="bg-black w-full   mt-40 grid grid-cols-8 justify-items-center gap-1 gap-y-5">
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+          <div className="bg-blue-100 w-[95px] h-[120px]"></div>
+
           <div className="bg-blue-100 w-[95px] h-[120px]"></div>
           <div className="bg-blue-100 w-[95px] h-[120px]"></div>
           <div className="bg-blue-100 w-[95px] h-[120px]"></div>
