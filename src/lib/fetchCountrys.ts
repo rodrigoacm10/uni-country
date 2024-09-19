@@ -2,13 +2,23 @@ import axios, { AxiosResponse } from "axios";
 
 export const fetchCountries = async ({
   pageParam = 1,
+  queryKey,
+}: {
+  pageParam: number;
+  queryKey: string[];
 }): Promise<{
   data: Country[];
   nextPage: number | undefined;
   nextCursor: number | undefined;
   hasNextPage: boolean;
 }> => {
-  const response = await axios.get("https://restcountries.com/v3.1/all");
+  const search = queryKey[1];
+  console.log(search);
+  const response = await axios.get(
+    search
+      ? `https://restcountries.com/v3.1/name/${search}`
+      : "https://restcountries.com/v3.1/all"
+  );
 
   const itemsPerPage = 24;
   const start = (pageParam - 1) * itemsPerPage;

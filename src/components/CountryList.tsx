@@ -2,12 +2,16 @@
 
 import { fetchCountries } from "@/lib/fetchCountrys";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Fragment } from "react";
+import { Fragment, useContext, useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { RiHome2Line } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa";
+import { FiLoader } from "react-icons/fi";
+import { CountriesContext } from "@/contexts/CountriesContext";
 
 export function CountryList() {
+  const { countrySearch } = useContext(CountriesContext);
+
   const {
     data,
     error,
@@ -17,18 +21,34 @@ export function CountryList() {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["projects"],
+    queryKey: ["projects", countrySearch],
+    // criar um contexto com search consumir o contexto aki e passar no fetch
     queryFn: fetchCountries,
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
   });
 
-  console.log(data);
+  console.log(data?.pages[0].data);
 
-  if (status === "error") return <p>Ocorreu um erro ao carregar os dados.</p>;
+  // if (status === "error") return <p>Ocorreu um erro ao carregar os dados.</p>;
 
   return (
-    <div className="  w-full">
+    <div className=" w-full">
+      {status === "error" ? (
+        <p className="text-center mt-32">
+          Ocorreu um erro ao carregar os dados.
+        </p>
+      ) : (
+        ""
+      )}
+
+      {data?.pages[0].data.length === undefined && isFetching ? (
+        <p className="flex justify-center w-full mt-32">
+          <FiLoader className="animate-spin" size={26} />
+        </p>
+      ) : (
+        ""
+      )}
       <div className="  w-full   mt-40 grid grid-cols-8 justify-items-center gap-1 gap-y-5">
         {data?.pages.map((page, pageIndex) => (
           <Fragment key={pageIndex}>
@@ -55,21 +75,34 @@ export function CountryList() {
       </div>
 
       <div className="mt-8 flex justify-center ">
-        <button
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-          className="bg-red-100 flex items-center justify-center w-[40px] h-[40px] rounded-full"
-        >
-          {isFetching ? "aaaa" : ""}
+        {hasNextPage ? (
+          <button
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isFetchingNextPage}
+            className="bg-red-100 flex items-center justify-center w-[40px] h-[40px] rounded-full"
+          >
+            {/* {isFetching ? <FiLoader className="animate-spin" /> : ""}
 
-          {isFetchingNextPage ? (
-            "Carregando mais..."
-          ) : hasNextPage ? (
+          {isFetchingNextPage && !isFetching ? (
+            "a"
+          ) : hasNextPage && !isFetching ? (
             <FaPlus />
           ) : (
             ""
-          )}
-        </button>
+          )} */}
+            {isFetching ? (
+              <FiLoader className="animate-spin" />
+            ) : hasNextPage && !isFetching ? (
+              <FaPlus />
+            ) : (
+              ""
+            )}
+
+            {/* {isFetching ? <FiLoader className="animate-spin" /> : <FaPlus />} */}
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
