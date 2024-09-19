@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CountryList } from "@/components/CountryList";
+import { SearchFilter } from "@/components/SearchFilter";
 
 export default function Home() {
   const client = new QueryClient();
@@ -18,25 +19,7 @@ export default function Home() {
             <p>que você pensar</p>
           </div>
 
-          <div className="w-[300px] relative  self-center  flex mt-20   ">
-            <input
-              placeholder="sla"
-              className="w-full   border-2 rounded-full px-6 py-2 "
-            />
-            <button
-              type="submit"
-              className="flex items-center justify-center bg-black absolute -top-[28%] translate-y-1/2 right-[6px] w-[33px] p-[5px] rounded-full"
-            >
-              a
-            </button>
-            <button className="border bg-black top-0 -right-12 p-2 w-[42px] rounded-full absolute ">
-              a
-            </button>
-
-            <button className="border bg-black top-0 -right-[94px] p-2 w-[42px] rounded-full absolute ">
-              a
-            </button>
-          </div>
+          <SearchFilter />
 
           <CountryList />
         </div>
