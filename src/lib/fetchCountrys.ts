@@ -10,7 +10,7 @@ export const fetchCountries = async ({
 }> => {
   const response = await axios.get("https://restcountries.com/v3.1/all");
 
-  const itemsPerPage = 20;
+  const itemsPerPage = 24;
   const start = (pageParam - 1) * itemsPerPage;
   const paginatedData = response.data.slice(start, start + itemsPerPage);
 
