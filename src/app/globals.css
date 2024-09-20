@@ -25,3 +25,44 @@ body {
     text-wrap: balance;
   }
 }
+
+/* transform: translateY(-16px); */
+
+.group:hover {
+  transform: translateY(-30px);
+}
+
+.group:hover .firstChild {
+  /* Primeiro executa shakeUp, depois entra em loop com upDownLoop */
+  animation: shakeUp 0.3s ease-in forwards, upDownLoop 1.5s linear infinite;
+  animation-delay: 0s, 0.3s; /* Aplica o delay para a segunda animação começar após a primeira */
+}
+
+/* Animação de subida com chacoalhar */
+@keyframes shakeUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-2px) rotate(3deg);
+  }
+  60% {
+    transform: translateY(-4px) rotate(-3deg);
+  }
+  100% {
+    transform: translateY(-6px) rotate(0deg);
+  }
+}
+
+/* Animação de leve oscilação vertical em loop */
+@keyframes upDownLoop {
+  0% {
+    transform: translateY(-6px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
