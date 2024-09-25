@@ -9,7 +9,8 @@ import { CountriesContext } from "@/contexts/CountriesContext";
 import { motion } from "framer-motion";
 
 export function CountryList() {
-  const { countrySearch } = useContext(CountriesContext);
+  const { countrySearch, subRegion, region, population } =
+    useContext(CountriesContext);
 
   const container = {
     hidden: { opacity: 0 },
@@ -46,7 +47,13 @@ export function CountryList() {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["projects", countrySearch],
+    queryKey: [
+      "projects",
+      countrySearch,
+      region.value,
+      subRegion.value,
+      population,
+    ],
     queryFn: fetchCountries,
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
