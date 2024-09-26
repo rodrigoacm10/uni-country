@@ -1,3 +1,7 @@
+import { Country } from "@/types/countryType";
+import { corPopuation } from "@/utils.ts/corPopulation";
+import { sortCountries } from "@/utils.ts/sortCountries";
+import { stringToBoolean } from "@/utils.ts/stringToBoolean";
 import axios, { AxiosResponse } from "axios";
 
 interface PopulationProps {
@@ -18,30 +22,17 @@ export const fetchCountries = async ({
   nextCursor: number | undefined;
   hasNextPage: boolean;
 }> => {
-  const corPopuation = (val: string) => {
-    console.log(val);
-
-    if (val === "none") {
-      return { type: "none", min: 0, max: 0 };
-    } else if (val === "1m") {
-      return { type: "1m", min: 0, max: 1000000 };
-    } else if (val === "1m10m") {
-      return { type: "1m10m", min: 1000000, max: 10000000 };
-    } else if (val === "10m100m") {
-      return { type: "10m100m", min: 10000000, max: 100000000 };
-    } else if (val === "100m") {
-      return { type: "100m", min: 0, max: 100000000 };
-    }
-
-    return { type: "none", min: 0, max: 0 };
-  };
-
   const search = queryKey[1];
   const region = queryKey[2];
   const subRegion = queryKey[3];
   const population = corPopuation(queryKey[4]);
+  const nameOrde = queryKey[5];
+  const populationOrderDesc = queryKey[6];
+  const populationOrderAsc = queryKey[7];
+  const areaOrde = queryKey[8];
 
-  console.log(search);
+  console.log("population", population);
+
   const response = await axios.get(
     search
       ? `https://restcountries.com/v3.1/name/${search}`
@@ -69,7 +60,15 @@ export const fetchCountries = async ({
 
   const itemsPerPage = 24;
   const start = (pageParam - 1) * itemsPerPage;
-  const paginatedData = arrData();
+  const sortedData = sortCountries(
+    arrData(),
+    stringToBoolean(nameOrde),
+    stringToBoolean(populationOrderDesc),
+    stringToBoolean(populationOrderAsc),
+    stringToBoolean(areaOrde)
+  );
+  const paginatedData = sortedData.slice(start, start + itemsPerPage);
+  // const paginatedData = response.data.slice(start, start + itemsPerPage);
 
   return {
     data: paginatedData,

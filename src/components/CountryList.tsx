@@ -9,8 +9,16 @@ import { CountriesContext } from "@/contexts/CountriesContext";
 import { motion } from "framer-motion";
 
 export function CountryList() {
-  const { countrySearch, subRegion, region, population } =
-    useContext(CountriesContext);
+  const {
+    countrySearch,
+    subRegion,
+    region,
+    population,
+    nameOrde,
+    populationOrderDesc,
+    populationOrderAsc,
+    areaOrde,
+  } = useContext(CountriesContext);
 
   const container = {
     hidden: { opacity: 0 },
@@ -53,6 +61,10 @@ export function CountryList() {
       region.value,
       subRegion.value,
       population,
+      `${nameOrde}`,
+      `${populationOrderDesc}`,
+      `${populationOrderAsc}`,
+      `${areaOrde}`,
     ],
     queryFn: fetchCountries,
     initialPageParam: 1,

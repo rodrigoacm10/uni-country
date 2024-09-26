@@ -2,6 +2,7 @@ import { CountriesContext } from "@/contexts/CountriesContext";
 import { useCallback, useContext, useState } from "react";
 import { debounce } from "lodash";
 import { FilterContainer } from "./FilterContainer";
+import { OrderingContainer } from "./OrderingContainer";
 
 export function SearchFilter() {
   const { countrySearch, setCountrySearch } = useContext(CountriesContext);
@@ -65,6 +66,8 @@ export function SearchFilter() {
           </button>
 
           {filtersVisible ? <FilterContainer /> : ""}
+
+          {ordenationVisible ? <OrderingContainer /> : ""}
         </div>
       </form>
     </div>
