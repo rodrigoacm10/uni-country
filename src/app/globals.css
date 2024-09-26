@@ -24,6 +24,20 @@ body {
   animation-delay: 0s, 0.3s; /* Aplica o delay para a segunda animação começar após a primeira */
 }
 
+.filterOrdenation {
+  animation: upDown 0.2s ease-in forwards;
+}
+
+.filterOrdenationInput {
+  animation: upDownRotation 0.6s ease-in forwards;
+}
+
+.filterOrdenationClose {
+  display: hidden;
+  animation: downUp 0.2s forwards;
+  pointer-events: none; /* Desativa interações */
+}
+
 /* Animação de subida com chacoalhar */
 @keyframes shakeUp {
   0% {
@@ -52,6 +66,52 @@ body {
     transform: translateY(-6px);
   }
 }
+
+@keyframes upDown {
+  0% {
+    transform: translateY(8px) rotate(-1deg);
+    opacity: 0.75;
+  }
+  75% {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes downUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(8px) rotate(-1deg);
+    opacity: 0;
+    display: hidden;
+  }
+}
+
+@keyframes upDownRotation {
+  0% {
+    transform: translateY(7px) rotate(-6deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(-0.5px) rotate(-3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

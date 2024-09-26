@@ -24,6 +24,8 @@ export function FilterContainer() {
     setRegion,
     population,
     setPopulation,
+    filtersVisible,
+    setFiltersVisible,
   } = useContext(CountriesContext);
 
   const [openSubReg, setOpenSubReg] = useState(false);
@@ -32,10 +34,18 @@ export function FilterContainer() {
   const [valueReg, setValueReg] = useState("");
 
   return (
-    <div className="absolute top-11 h-[330px] w-[275px] bg-black/0   ">
-      <div className="absolute w-[200px]  right-10 bg-white rounded-3xl py-4 px-5 border z-auto ">
+    <div
+      className={`${
+        filtersVisible ? "" : "filterOrdenationClose"
+      } absolute top-11 h-[330px] w-[275px] bg-black/0  `}
+    >
+      <div
+        className={`${
+          filtersVisible ? "" : "filterOrdenationClose"
+        } filterOrdenation absolute w-[200px]  right-10 bg-white rounded-3xl py-4 px-5 border z-auto `}
+      >
         <h3 className="font-semibold">Filtrar por:</h3>
-        <form className="mt-2 flex flex-col gap-2 z-40">
+        <div className="mt-2 flex flex-col gap-2 z-40">
           <div>
             <label
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
@@ -54,6 +64,7 @@ export function FilterContainer() {
               setEspecific={setSubRegion}
               text="choose sub-region"
               findText="Find sub-region"
+              close={setFiltersVisible}
             />
           </div>
 
@@ -75,6 +86,7 @@ export function FilterContainer() {
               setEspecific={setRegion}
               text="choose region"
               findText="Find region"
+              close={setFiltersVisible}
             />
           </div>
 
@@ -85,6 +97,7 @@ export function FilterContainer() {
             <Select
               onValueChange={(e) => {
                 setPopulation(e);
+                setFiltersVisible(false);
               }}
             >
               <SelectTrigger className="">
@@ -101,7 +114,7 @@ export function FilterContainer() {
               </SelectContent>
             </Select>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

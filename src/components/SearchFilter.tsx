@@ -3,11 +3,19 @@ import { useCallback, useContext, useState } from "react";
 import { debounce } from "lodash";
 import { FilterContainer } from "./FilterContainer";
 import { OrderingContainer } from "./OrderingContainer";
+import { VscSettings } from "react-icons/vsc";
+import { IoClose } from "react-icons/io5";
+import { FaSortAmountDown } from "react-icons/fa";
 
 export function SearchFilter() {
-  const { countrySearch, setCountrySearch } = useContext(CountriesContext);
-  const [filtersVisible, setFiltersVisible] = useState(false);
-  const [ordenationVisible, setOrdenationVisible] = useState(false);
+  const {
+    countrySearch,
+    setCountrySearch,
+    filtersVisible,
+    setFiltersVisible,
+    ordenationVisible,
+    setOrdenationVisible,
+  } = useContext(CountriesContext);
 
   // Debounce para aguardar 500ms após o usuário parar de digitar
   const debouncedSearch = useCallback(
@@ -49,9 +57,13 @@ export function SearchFilter() {
               setOrdenationVisible(false);
               setFiltersVisible(!filtersVisible);
             }}
-            className="border bg-black  w-[32px] h-[32px] rounded-full   "
+            className="border flex items-center justify-center bg-black  w-[32px] h-[32px] rounded-full   "
           >
-            a
+            {filtersVisible ? (
+              <IoClose className="filterOrdenationInput" color="white" />
+            ) : (
+              <VscSettings className="filterOrdenationInput" color="white" />
+            )}
           </button>
           {/* top-0 -right-[94px] */}
           <button
@@ -60,14 +72,22 @@ export function SearchFilter() {
               setFiltersVisible(false);
               setOrdenationVisible(!ordenationVisible);
             }}
-            className="border bg-black  w-[32px] h-[32px] rounded-full   "
+            className="border bg-black flex items-center justify-center w-[32px] h-[32px] rounded-full   "
           >
-            a
+            {ordenationVisible ? (
+              <IoClose className="filterOrdenationInput" color="white" />
+            ) : (
+              <FaSortAmountDown
+                size={14}
+                className="filterOrdenationInput"
+                color="white"
+              />
+            )}
           </button>
 
-          {filtersVisible ? <FilterContainer /> : ""}
+          <FilterContainer />
 
-          {ordenationVisible ? <OrderingContainer /> : ""}
+          <OrderingContainer />
         </div>
       </form>
     </div>

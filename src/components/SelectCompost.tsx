@@ -21,6 +21,7 @@ export function SelectComport({
   setEspecific,
   text,
   findText,
+  close,
 }: {
   open: boolean;
   setOpen: (val: boolean) => void;
@@ -31,6 +32,7 @@ export function SelectComport({
   setEspecific: (val: any) => void;
   text: string;
   findText: string;
+  close?: (val: boolean) => void;
 }) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -56,10 +58,11 @@ export function SelectComport({
                 className="w-full"
                 value={""}
                 onSelect={(currentValue: any) => {
+                  setOpen(false);
+                  close ? close(false) : "";
                   setEspecific("");
 
                   setValue("");
-                  setOpen(false);
                 }}
               >
                 <Check
@@ -80,11 +83,12 @@ export function SelectComport({
                     const selectSubReg = arrValues.find(
                       (cli) => cli.name == currentValue
                     );
+                    setOpen(false);
+                    close ? close(false) : "";
                     console.log(selectSubReg);
                     setEspecific(selectSubReg as any);
 
                     setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
                   }}
                 >
                   <Check

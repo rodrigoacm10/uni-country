@@ -26,6 +26,10 @@ export const CountriesContext = createContext({
   setPopulationOrderAsc: (val: boolean) => {},
   areaOrde: false,
   setAreaOrder: (val: boolean) => {},
+  filtersVisible: false,
+  setFiltersVisible: (val: boolean) => {},
+  ordenationVisible: false,
+  setOrdenationVisible: (val: boolean) => {},
 });
 
 interface CountriesContextProviderProps {
@@ -43,6 +47,8 @@ export function CountriesContextProvider({
   const [populationOrderDesc, setPopulationOrderDesc] = useState(false);
   const [populationOrderAsc, setPopulationOrderAsc] = useState(false);
   const [areaOrde, setAreaOrder] = useState(false);
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [ordenationVisible, setOrdenationVisible] = useState(false);
 
   return (
     // Corrigido para acessar o provider corretamente
@@ -64,6 +70,10 @@ export function CountriesContextProvider({
         setPopulationOrderAsc,
         areaOrde,
         setAreaOrder,
+        filtersVisible,
+        setFiltersVisible,
+        ordenationVisible,
+        setOrdenationVisible,
       }}
     >
       {children}

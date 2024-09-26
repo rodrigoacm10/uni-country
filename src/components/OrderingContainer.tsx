@@ -16,13 +16,19 @@ export function OrderingContainer() {
     setPopulationOrderAsc,
     areaOrde,
     setAreaOrder,
+    ordenationVisible,
+    setOrdenationVisible,
   } = useContext(CountriesContext);
 
   return (
-    <div className="absolute top-11 h-[330px] -right-8 w-[275px] bg-black/0   ">
-      <div className="absolute w-[150px]  right-8 bg-white rounded-3xl py-4 px-5 border z-auto ">
+    <div
+      className={`${
+        ordenationVisible ? "" : "filterOrdenationClose"
+      } absolute top-11 h-[330px] -right-8 w-[275px] bg-black/0`}
+    >
+      <div className="absolute w-[150px] filterOrdenation  right-8 bg-white rounded-3xl py-4 px-5 border z-auto ">
         <h3 className="font-semibold">Ordernar por:</h3>
-        <form className="mt-2 flex flex-col gap-2 z-40">
+        <div className="mt-2 flex flex-col gap-2 z-40">
           <div className="flex flex-col">
             <label
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
@@ -41,7 +47,7 @@ export function OrderingContainer() {
                 setAreaOrder(false);
               }}
               onCheckedChange={() => {
-                console.log("a");
+                setOrdenationVisible(false);
               }}
               id="subregion"
             />
@@ -64,7 +70,7 @@ export function OrderingContainer() {
                 setAreaOrder(false);
               }}
               onCheckedChange={() => {
-                console.log("a");
+                setOrdenationVisible(false);
               }}
               id="populationDesc"
             />
@@ -88,7 +94,7 @@ export function OrderingContainer() {
                 setAreaOrder(false);
               }}
               onCheckedChange={() => {
-                console.log("a");
+                setOrdenationVisible(false);
               }}
               id="populationAsc"
             />
@@ -111,12 +117,12 @@ export function OrderingContainer() {
                 setAreaOrder(!areaOrde);
               }}
               onCheckedChange={() => {
-                console.log("a");
+                setOrdenationVisible(false);
               }}
               id="area"
             />
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
