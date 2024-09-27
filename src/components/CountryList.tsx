@@ -1,4 +1,4 @@
-import { fetchCountries } from "@/lib/fetchCountrys";
+import { fetchCountries } from "@/lib/fetchCountries";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Fragment, useContext } from "react";
 import { IoLocationOutline } from "react-icons/io5";
@@ -7,6 +7,7 @@ import { FaPlus } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
 import { CountriesContext } from "@/contexts/CountriesContext";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export function CountryList() {
   const {
@@ -19,6 +20,8 @@ export function CountryList() {
     populationOrderAsc,
     areaOrde,
   } = useContext(CountriesContext);
+
+  const router = useRouter();
 
   const container = {
     hidden: { opacity: 0 },
@@ -102,7 +105,17 @@ export function CountryList() {
                 className="w-[95px] "
               >
                 {/* hover:-translate-y-4 */}
-                <div className="transition duration-200  group ">
+                <div
+                  onClick={() => {
+                    // nome lower e com espaço
+                    //  passar um context e enviar o nome dps na pagina usar o useeffect e pegar as ingos
+
+                    router.push(
+                      `/country/${country.name.common.toLowerCase()}`
+                    );
+                  }}
+                  className="transition duration-200  group "
+                >
                   <div className="w-full h-[95px] flex items-center overflow-hidden firstChild">
                     <img src={country.flags.png} alt={country.name.common} />
                   </div>
@@ -110,13 +123,19 @@ export function CountryList() {
                   <p className="truncate mt-2 text-[#7B7B7B] font-semibold">
                     {country.name.common}
                   </p>
-                  <p className="flex items-center gap-1 text-[#7B7B7B]">
-                    <RiHome2Line color="#7B7B7B" /> capital
-                  </p>
+                  <div className="  grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
+                    <RiHome2Line color="#7B7B7B  " />
+                    <p className="truncate">
+                      {country?.capital?.[0] ? country.capital[0] : "none"}
+                    </p>
+                  </div>
 
-                  <p className="flex items-center gap-1 text-[#7B7B7B]">
-                    <IoLocationOutline color="#7B7B7B" /> local
-                  </p>
+                  <div className="  grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
+                    <IoLocationOutline color="#7B7B7B  " />
+                    <p className="truncate">
+                      {country?.region ? country.region : "none"}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
