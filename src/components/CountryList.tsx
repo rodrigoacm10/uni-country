@@ -1,6 +1,6 @@
 import { fetchCountries } from "@/lib/fetchCountries";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useRef, useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { RiHome2Line } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa";
@@ -28,8 +28,8 @@ export function CountryList() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Define o atraso entre os elementos para criar o efeito de onda
-        delayChildren: 0.2, // Atraso antes de iniciar a animação
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
@@ -38,17 +38,18 @@ export function CountryList() {
     hidden: {
       opacity: 0,
       y: 250,
-    }, // Começa abaixo com opacidade 0
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        delay: index * 0.15, // Atraso crescente para efeito de onda
+        delay: index * 0.15,
         duration: 0.7,
         ease: "easeOut",
       },
     },
   });
+
   const {
     data,
     error,
@@ -71,10 +72,32 @@ export function CountryList() {
     ],
     queryFn: fetchCountries,
     initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
-  console.log(data?.pages[0].data);
+  // Cria uma referência para o sentinela
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  // Configura o Intersection Observer para detectar o final da lista
+  useEffect(() => {
+    if (!hasNextPage || isFetchingNextPage) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        fetchNextPage();
+      }
+    });
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
     <div className="w-full">
@@ -94,7 +117,7 @@ export function CountryList() {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="flag-container w-full mt-40 grid grid-cols-8 justify-items-center gap-1 gap-y-5"
+        className="flag-container w-full mt-40 px-4 grid md:grid-cols-6 sm:grid-cols-4 lit:grid-cols-3 grid-cols-2 justify-items-center gap-1 gap-y-6"
       >
         {data?.pages.map((page, pageIndex) => (
           <Fragment key={pageIndex}>
@@ -102,36 +125,32 @@ export function CountryList() {
               <motion.div
                 key={countryIndex}
                 variants={item(countryIndex)}
-                className="w-[95px] "
+                className=" w-[95px]  "
               >
-                {/* hover:-translate-y-4 */}
                 <div
                   onClick={() => {
-                    // nome lower e com espaço
-                    //  passar um context e enviar o nome dps na pagina usar o useeffect e pegar as ingos
-
                     router.push(
                       `/country/${country.name.common.toLowerCase()}`
                     );
                   }}
-                  className="transition duration-200  group "
+                  className="transition duration-200 group"
                 >
-                  <div className="w-full h-[95px] flex items-center overflow-hidden firstChild">
+                  <div className="w-full  h-[95px]   flex items-center overflow-hidden firstChild">
                     <img src={country.flags.png} alt={country.name.common} />
                   </div>
 
                   <p className="truncate mt-2 text-[#7B7B7B] font-semibold">
                     {country.name.common}
                   </p>
-                  <div className="  grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
-                    <RiHome2Line color="#7B7B7B  " />
+                  <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
+                    <RiHome2Line color="#7B7B7B" />
                     <p className="truncate">
                       {country?.capital?.[0] ? country.capital[0] : "none"}
                     </p>
                   </div>
 
-                  <div className="  grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
-                    <IoLocationOutline color="#7B7B7B  " />
+                  <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
+                    <IoLocationOutline color="#7B7B7B" />
                     <p className="truncate">
                       {country?.region ? country.region : "none"}
                     </p>
@@ -143,23 +162,14 @@ export function CountryList() {
         ))}
       </motion.div>
 
-      <div className="mt-8 flex justify-center">
-        {hasNextPage && (
-          <button
-            onClick={() => fetchNextPage()}
-            disabled={!hasNextPage || isFetchingNextPage}
-            className="bg-red-100 flex items-center justify-center w-[40px] h-[40px] rounded-full"
-          >
-            {isFetching ? (
-              <FiLoader className="animate-spin" />
-            ) : hasNextPage && !isFetching ? (
-              <FaPlus />
-            ) : (
-              ""
-            )}
-          </button>
-        )}
-      </div>
+      {/* Sentinela para o Intersection Observer */}
+      <div ref={observerRef} className="h-10"></div>
+
+      {isFetchingNextPage && (
+        <div className="flex justify-center mt-8">
+          <FiLoader className="animate-spin" size={26} />
+        </div>
+      )}
     </div>
   );
 }

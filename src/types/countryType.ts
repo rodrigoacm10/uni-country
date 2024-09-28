@@ -9,6 +9,10 @@ export interface Country {
       };
     };
   };
+  idd: {
+    root: string;
+    suffixes: string[];
+  };
   tld?: string[]; // Domínio de topo (ex: .br, .us)
   cca2: string; // Código de duas letras do país
   cca3: string; // Código de três letras do país
