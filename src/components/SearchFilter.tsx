@@ -33,6 +33,15 @@ export function SearchFilter() {
   return (
     <div className="w-[300px]   gap-2 self-center flex-col  flex mt-20   ">
       <form className="relative">
+        {/* <div className="bg-white w-full font-[600]  border-2 rounded-full px-6 py-2 ">
+          <input
+            defaultValue={countrySearch}
+            onChange={handleChange}
+            placeholder="sla"
+            className="border-none focus:border-none ring-0 "
+          />
+        </div> */}
+
         <input
           defaultValue={countrySearch}
           onChange={handleChange}
@@ -49,7 +58,7 @@ export function SearchFilter() {
           a
         </button> */}
 
-        <div className="  flex    gap-1 items-center justify-end absolute  bottom-[50%] translate-y-1/2  right-[6px]">
+        <div className="  flex  bg-white rounded-full   gap-1 items-center justify-end absolute  bottom-[50%] translate-y-1/2  right-[6px]">
           {/* top-0 -right-12 */}
           <button
             onClick={(e) => {
@@ -57,7 +66,7 @@ export function SearchFilter() {
               setOrdenationVisible(false);
               setFiltersVisible(!filtersVisible);
             }}
-            className="border flex items-center justify-center bg-black  w-[32px] h-[32px] rounded-full   "
+            className="border btnAnimation flex items-center justify-center bg-black  w-[32px] h-[32px] rounded-full   "
           >
             {filtersVisible ? (
               <IoClose className="filterOrdenationInput" color="white" />
@@ -72,7 +81,7 @@ export function SearchFilter() {
               setFiltersVisible(false);
               setOrdenationVisible(!ordenationVisible);
             }}
-            className="border bg-black flex items-center justify-center w-[32px] h-[32px] rounded-full   "
+            className="border btnAnimation bg-black flex items-center justify-center w-[32px] h-[32px] rounded-full   "
           >
             {ordenationVisible ? (
               <IoClose className="filterOrdenationInput" color="white" />

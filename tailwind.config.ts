@@ -16,6 +16,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        trail: {
+          "0%": { "--angle": "0deg" },
+          "100%": { "--angle": "360deg" },
+        },
+      },
+      animation: {
+        trail: "trail var(--duration) linear infinite",
+      },
       screens: {
         lit: "465px", // adiciona um breakpoint customizado
       },

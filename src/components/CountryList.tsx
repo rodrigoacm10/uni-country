@@ -102,9 +102,7 @@ export function CountryList() {
   return (
     <div className="w-full">
       {status === "error" && (
-        <p className="text-center mt-32">
-          Ocorreu um erro ao carregar os dados.
-        </p>
+        <p className="text-center mt-32 font-bold">Nenhum país encontrado</p>
       )}
 
       {data?.pages[0].data.length === undefined && isFetching && (

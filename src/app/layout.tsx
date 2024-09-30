@@ -25,13 +25,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  //
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F1F1F1]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f7f7f7] `}
       >
         <QueryClientPro>
-          <CountriesContextProvider>{children}</CountriesContextProvider>
+          <CountriesContextProvider>
+            {children}
+
+            <div className="fixed  bottom-0 left-0 bg-[linear-gradient(to_top,_pink_2%,#f7f7f7_100%)] w-full z-10 h-[5vh]"></div>
+          </CountriesContextProvider>
         </QueryClientPro>
       </body>
     </html>
