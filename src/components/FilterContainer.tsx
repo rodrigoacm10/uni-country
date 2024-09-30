@@ -17,9 +17,7 @@ import {
 
 export function FilterContainer() {
   const {
-    subRegion,
     setSubRegion,
-    region,
     setRegion,
     setPopulation,
     filtersVisible,

@@ -62,7 +62,7 @@ export function SelectComport({
               <CommandItem
                 className="w-full"
                 value={""}
-                onSelect={(currentValue: string) => {
+                onSelect={() => {
                   setOpen(false);
                   close ? close(false) : "";
                   setEspecific({
