@@ -6,7 +6,7 @@ export function InfosLi({
   title,
 }: {
   children: ReactNode;
-  icon: any;
+  icon: string;
   title: string;
 }) {
   return (

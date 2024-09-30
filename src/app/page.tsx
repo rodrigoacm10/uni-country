@@ -1,6 +1,5 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CountryList } from "@/components/CountryList";
 import { SearchFilter } from "@/components/SearchFilter";
 import { BackgroundStyled } from "@/components/BackgroundStytled";

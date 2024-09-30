@@ -2,7 +2,7 @@
 
 import { CountriesContext } from "@/contexts/CountriesContext";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { Switch } from "./ui/switch";
 

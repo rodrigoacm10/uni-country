@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import {
@@ -11,13 +11,18 @@ import {
 } from "./ui/command";
 import { cn } from "@/lib/utils";
 
+type NameVal = {
+  value: string;
+  name: string;
+};
+
 export function SelectComport({
   open,
   setOpen,
   value,
   setValue,
   arrValues,
-  especif,
+  // especif,
   setEspecific,
   text,
   findText,
@@ -27,9 +32,9 @@ export function SelectComport({
   setOpen: (val: boolean) => void;
   value: string;
   setValue: (val: string) => void;
-  arrValues: any[];
-  especif: any;
-  setEspecific: (val: any) => void;
+  arrValues: NameVal[];
+  // especif: any;
+  setEspecific: (val: NameVal) => void;
   text: string;
   findText: string;
   close?: (val: boolean) => void;
@@ -57,10 +62,13 @@ export function SelectComport({
               <CommandItem
                 className="w-full"
                 value={""}
-                onSelect={(currentValue: any) => {
+                onSelect={(currentValue: string) => {
                   setOpen(false);
                   close ? close(false) : "";
-                  setEspecific("");
+                  setEspecific({
+                    name: "",
+                    value: "",
+                  });
 
                   setValue("");
                 }}
@@ -78,7 +86,7 @@ export function SelectComport({
                   className="w-full"
                   key={framework.value}
                   value={framework.name}
-                  onSelect={(currentValue: any) => {
+                  onSelect={(currentValue: string) => {
                     console.log(currentValue);
                     const selectSubReg = arrValues.find(
                       (cli) => cli.name == currentValue
@@ -86,7 +94,7 @@ export function SelectComport({
                     setOpen(false);
                     close ? close(false) : "";
                     console.log(selectSubReg);
-                    setEspecific(selectSubReg as any);
+                    setEspecific(selectSubReg || { name: "", value: "" });
 
                     setValue(currentValue === value ? "" : currentValue);
                   }}

@@ -3,7 +3,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { Fragment, useContext, useRef, useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { RiHome2Line } from "react-icons/ri";
-import { FaPlus } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
 import { CountriesContext } from "@/contexts/CountriesContext";
 import { motion } from "framer-motion";
@@ -34,7 +33,7 @@ export function CountryList() {
     },
   };
 
-  const item = (index: any) => ({
+  const item = (index: number) => ({
     hidden: {
       opacity: 0,
       y: 250,
@@ -52,7 +51,7 @@ export function CountryList() {
 
   const {
     data,
-    error,
+    // error,
     fetchNextPage,
     hasNextPage,
     isFetching,

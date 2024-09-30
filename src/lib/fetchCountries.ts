@@ -4,12 +4,6 @@ import { sortCountries } from "@/utils.ts/sortCountries";
 import { stringToBoolean } from "@/utils.ts/stringToBoolean";
 import axios, { AxiosResponse } from "axios";
 
-interface PopulationProps {
-  type: string;
-  min: number;
-  max: number;
-}
-
 export const fetchCountries = async ({
   pageParam = 1,
   queryKey,

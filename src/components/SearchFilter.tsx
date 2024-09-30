@@ -1,5 +1,5 @@
 import { CountriesContext } from "@/contexts/CountriesContext";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { debounce } from "lodash";
 import { FilterContainer } from "./FilterContainer";
 import { OrderingContainer } from "./OrderingContainer";

@@ -11,7 +11,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
@@ -22,7 +21,6 @@ export function FilterContainer() {
     setSubRegion,
     region,
     setRegion,
-    population,
     setPopulation,
     filtersVisible,
     setFiltersVisible,
@@ -60,7 +58,7 @@ export function FilterContainer() {
               value={valueSubReg}
               setValue={setValueSubReg}
               arrValues={subRegionArr}
-              especif={subRegion}
+              // especif={subRegion}
               setEspecific={setSubRegion}
               text="choose sub-region"
               findText="Find sub-region"
@@ -82,7 +80,7 @@ export function FilterContainer() {
               value={valueReg}
               setValue={setValueReg}
               arrValues={regionArr}
-              especif={region}
+              // especif={region}
               setEspecific={setRegion}
               text="choose region"
               findText="Find region"

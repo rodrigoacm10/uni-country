@@ -105,9 +105,9 @@ export default function Country({
                           <div className="grid lit:grid-cols-3 grid-cols-2 gap-x-2">
                             {country?.timezones.map((e, i) => {
                               if (i === country.timezones.length - 1) {
-                                return <p> {e}</p>;
+                                return <p key={i}> {e}</p>;
                               } else {
-                                return <p>{e}, </p>;
+                                return <p key={i}>{e}, </p>;
                               }
                             })}
                           </div>
@@ -121,8 +121,8 @@ export default function Country({
                           <InfosLi icon={"DD"} title={"discagem"}>
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              flex items-center">
                               {country?.idd?.root || "---"}
-                              {country?.idd?.suffixes?.map((e) => (
-                                <p>{e}</p>
+                              {country?.idd?.suffixes?.map((e, i) => (
+                                <p key={i}>{e}</p>
                               ))}
                             </p>
                           </InfosLi>
@@ -157,9 +157,12 @@ export default function Country({
                         <ul className="gap-x-4  leading-[26px] grid grid-cols-2 mt-2 max-w-[400px]">
                           <InfosLi icon={"DD"} title={"Idiomas"}>
                             {languages.length > 0
-                              ? languages.map((e) => {
+                              ? languages.map((e, i) => {
                                   return (
-                                    <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
+                                    <p
+                                      key={i}
+                                      className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-"
+                                    >
                                       {e}
                                     </p>
                                   );
@@ -169,9 +172,12 @@ export default function Country({
 
                           <InfosLi icon={"DD"} title={"Moedas"}>
                             {currencies.length > 0
-                              ? currencies.map((e) => {
+                              ? currencies.map((e, i) => {
                                   return (
-                                    <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
+                                    <p
+                                      key={i}
+                                      className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-"
+                                    >
                                       {e}
                                     </p>
                                   );
