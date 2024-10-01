@@ -7,6 +7,7 @@ import { FiLoader } from "react-icons/fi";
 import { CountriesContext } from "@/contexts/CountriesContext";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { corRegions } from "@/utils.ts/corRegions";
 
 export function CountryList() {
   const {
@@ -100,6 +101,8 @@ export function CountryList() {
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
+  console.log(data?.pages[0].data);
+
   return (
     <div className="w-full">
       {status === "error" && (
@@ -155,19 +158,22 @@ export function CountryList() {
 
                   <div className="mx-2 mb-1">
                     <p className="truncate mt-2 text-[#7B7B7B] font-semibold">
-                      {country.name.common}
+                      {/* {country.name.common} */}
+                      {country?.translations?.por.common}
                     </p>
                     <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
                       <RiHome2Line color="#7B7B7B" />
                       <p className="truncate">
-                        {country?.capital?.[0] ? country.capital[0] : "none"}
+                        {country?.capital?.[0] ? country.capital[0] : "nenhuma"}
                       </p>
                     </div>
 
                     <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
                       <IoLocationOutline color="#7B7B7B" />
                       <p className="truncate">
-                        {country?.region ? country.region : "none"}
+                        {country?.region
+                          ? corRegions("region", country.region)
+                          : "nenhuma"}
                       </p>
                     </div>
                   </div>

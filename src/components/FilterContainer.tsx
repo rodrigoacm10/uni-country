@@ -47,7 +47,7 @@ export function FilterContainer() {
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
               htmlFor="subregion"
             >
-              sub-region
+              sub-região
             </label>
 
             <SelectComport
@@ -58,8 +58,8 @@ export function FilterContainer() {
               arrValues={subRegionArr}
               // especif={subRegion}
               setEspecific={setSubRegion}
-              text="choose sub-region"
-              findText="Find sub-region"
+              text="escolher sub-região"
+              findText="Procurar sub-região"
               close={setFiltersVisible}
             />
           </div>
@@ -69,7 +69,7 @@ export function FilterContainer() {
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
               htmlFor="subregion"
             >
-              region
+              região
             </label>
 
             <SelectComport
@@ -80,15 +80,15 @@ export function FilterContainer() {
               arrValues={regionArr}
               // especif={region}
               setEspecific={setRegion}
-              text="choose region"
-              findText="Find region"
+              text="escolher região"
+              findText="Procurar região"
               close={setFiltersVisible}
             />
           </div>
 
           <div>
             <label className="ml-2 font-semibold text-[14px] text-[#7B7B7B]">
-              population
+              população
             </label>
             <Select
               onValueChange={(e) => {
@@ -97,15 +97,15 @@ export function FilterContainer() {
               }}
             >
               <SelectTrigger className="">
-                <SelectValue placeholder="min population" />
+                <SelectValue placeholder="todos" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="none">none</SelectItem>
-                  <SelectItem value="1m">under 1M</SelectItem>
-                  <SelectItem value="1m10">1M to 10M</SelectItem>
-                  <SelectItem value="10m100">10M to 100M</SelectItem>
-                  <SelectItem value="100m">under 100M</SelectItem>
+                  <SelectItem value="none">todos</SelectItem>
+                  <SelectItem value="1m">abaixo de 1M</SelectItem>
+                  <SelectItem value="1m10">1M - 10M</SelectItem>
+                  <SelectItem value="10m100">10M - 100M</SelectItem>
+                  <SelectItem value="100m">abaixo de 100M</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

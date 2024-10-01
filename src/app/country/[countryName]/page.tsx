@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
+import { formatPopulation } from "@/utils.ts/formatPopulation";
+import { corRegions } from "@/utils.ts/corRegions";
 
 import { IoLocationOutline } from "react-icons/io5";
 import { RiHome2Line } from "react-icons/ri";
@@ -21,6 +23,7 @@ import { PiMapPinArea } from "react-icons/pi";
 import { PrinciInfosLi } from "@/components/PrinciInfosLi";
 import { IoEarthOutline } from "react-icons/io5";
 import { GoPeople } from "react-icons/go";
+import { FaRegClock } from "react-icons/fa6";
 
 export default function Country({
   params,
@@ -94,7 +97,7 @@ export default function Country({
                   className="text-[#7B7B7B] flex items-center gap-2 hover:gap-3 duration-500 font-semibold "
                 >
                   <FaLongArrowAltLeft size={18} />
-                  countries list
+                  Listagem de Países
                 </button>
               </div>
               <div className="grid justify-center md:grid-cols-[200px_1fr] h-full mt-5 gap-10">
@@ -109,10 +112,10 @@ export default function Country({
                       {" "}
                       <div className="leading-[30px]">
                         <h2 className="uppercase md:text-[32px] text-[28px]  relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500  font-bold">
-                          {country?.name.common}
+                          {country?.translations?.por.common}
                         </h2>
                         <h3 className="font-bold md:text-[20px] text-[18px]">
-                          {country?.name.official}
+                          {country?.translations?.por.official}
                         </h3>
                       </div>
                       <ul className=" flex flex-col gap-1 mt-2">
@@ -123,11 +126,13 @@ export default function Country({
 
                         <PrinciInfosLi
                           icon={<GoPeople />}
-                          title={`${country?.population}`}
+                          title={`${formatPopulation(
+                            country?.population || 0
+                          )}`}
                         />
 
                         <PrinciInfosLi
-                          icon={<GoPeople />}
+                          icon={<FaRegClock />}
                           component={
                             <div className="grid lit:grid-cols-3 grid-cols-2 gap-x-2">
                               {country?.timezones.map((e, i) => {
@@ -171,16 +176,20 @@ export default function Country({
 
                           <InfosLi
                             icon={<IoLocationOutline />}
-                            title={"region"}
+                            title={"região"}
                           >
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
-                              {country?.region || "---"}
+                              {country?.region
+                                ? corRegions("region", country?.region)
+                                : "---"}
                             </p>
                           </InfosLi>
 
-                          <InfosLi icon={<PiMapPinArea />} title={"sub-region"}>
+                          <InfosLi icon={<PiMapPinArea />} title={"sub-região"}>
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
-                              {country?.subregion || "---"}
+                              {country?.subregion
+                                ? corRegions("subregion", country?.subregion)
+                                : "---"}
                             </p>
                           </InfosLi>
                         </ul>
@@ -201,7 +210,7 @@ export default function Country({
                               : "---"}
                           </InfosLi>
 
-                          <InfosLi icon={<CiMoneyBill />} title={"Moedas"}>
+                          <InfosLi icon={<CiMoneyBill />} title={"moedas"}>
                             {currencies.length > 0
                               ? currencies.map((e, i) => {
                                   return (

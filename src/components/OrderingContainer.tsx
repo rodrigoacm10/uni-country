@@ -34,7 +34,7 @@ export function OrderingContainer() {
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
               htmlFor="subregion"
             >
-              name
+              nome
             </label>
 
             <Switch
@@ -57,7 +57,7 @@ export function OrderingContainer() {
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
               htmlFor="populationDesc"
             >
-              population Desc
+              população Des
             </label>
 
             <Switch
@@ -81,7 +81,7 @@ export function OrderingContainer() {
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
               htmlFor="populationAsc"
             >
-              population Asc
+              população Asc
             </label>
 
             <Switch
@@ -104,7 +104,7 @@ export function OrderingContainer() {
               className="ml-2 font-semibold text-[14px] text-[#7B7B7B]"
               htmlFor="area"
             >
-              area
+              área
             </label>
 
             <Switch

@@ -57,7 +57,7 @@ export function SelectComport({
         <Command className="">
           <CommandInput placeholder={findText} />
           <CommandList>
-            <CommandEmpty>Nenhum cliente encontrado</CommandEmpty>
+            <CommandEmpty>Nada encontrado</CommandEmpty>
             <CommandGroup>
               <CommandItem
                 className="w-full"
@@ -79,7 +79,7 @@ export function SelectComport({
                     value === "" ? "opacity-100" : "opacity-0"
                   )}
                 />
-                none
+                nenhum
               </CommandItem>
               {arrValues.map((framework) => (
                 <CommandItem
