@@ -58,6 +58,7 @@ export function SearchFilter() {
           a
         </button> */}
 
+        {/* className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500  " */}
         <div className="  flex  bg-white rounded-full   gap-1 items-center justify-end absolute  bottom-[50%] translate-y-1/2  right-[6px]">
           {/* top-0 -right-12 */}
           <button
@@ -66,7 +67,7 @@ export function SearchFilter() {
               setOrdenationVisible(false);
               setFiltersVisible(!filtersVisible);
             }}
-            className="border btnAnimation flex items-center justify-center bg-black  w-[32px] h-[32px] rounded-full   "
+            className="border btnAnimation flex items-center justify-center bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500  w-[32px] h-[32px] rounded-full   "
           >
             {filtersVisible ? (
               <IoClose className="filterOrdenationInput" color="white" />
@@ -81,7 +82,7 @@ export function SearchFilter() {
               setFiltersVisible(false);
               setOrdenationVisible(!ordenationVisible);
             }}
-            className="border btnAnimation bg-black flex items-center justify-center w-[32px] h-[32px] rounded-full   "
+            className="border btnAnimation flex items-center justify-center bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500  w-[32px] h-[32px] rounded-full   "
           >
             {ordenationVisible ? (
               <IoClose className="filterOrdenationInput" color="white" />

@@ -3,9 +3,11 @@
 import AnimatedBorderTrail from "@/components/animata/container/animated-border-trail";
 import { BackgroundStyled } from "@/components/BackgroundStytled";
 import { InfosLi } from "@/components/InfosLi";
+import { CountriesContext } from "@/contexts/CountriesContext";
 import { useCountry } from "@/hooks/useCountry";
 import { CurrencyType } from "@/types/currencyType";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
 
@@ -14,6 +16,8 @@ export default function Country({
 }: {
   params: { countryName: string };
 }) {
+  const { setCountryIndex } = useContext(CountriesContext);
+
   const router = useRouter();
 
   const { data, isFetching } = useCountry(params.countryName);
@@ -45,7 +49,7 @@ export default function Country({
   return (
     <>
       {/* <TracingBeam className="h-[200%] px-6"> */}
-      <div className="w-full   z-30 flex justify-center min-h-screen    p-10   relative ">
+      <div className="w-full  bg-[#f7f7f7] z-30 flex justify-center min-h-screen    p-10   relative ">
         <BackgroundStyled />
         {/* [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]  */}
 
@@ -65,6 +69,7 @@ export default function Country({
                 <button
                   onClick={() => {
                     router.push("/");
+                    setCountryIndex(-1);
                   }}
                   className="text-[#7B7B7B] flex items-center gap-2 hover:gap-3 duration-500 font-semibold "
                 >
@@ -85,7 +90,7 @@ export default function Country({
                     <>
                       {" "}
                       <div className="leading-[30px]">
-                        <h2 className="uppercase md:text-[32px] text-[28px] text-[#7C05B5] font-bold">
+                        <h2 className="uppercase md:text-[32px] text-[28px]  relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500  font-bold">
                           {country?.name.common}
                         </h2>
                         <h3 className="font-bold md:text-[20px] text-[18px]">

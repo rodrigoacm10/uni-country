@@ -18,6 +18,8 @@ export function CountryList() {
     populationOrderDesc,
     populationOrderAsc,
     areaOrde,
+    countryIndex,
+    setCountryIndex,
   } = useContext(CountriesContext);
 
   const router = useRouter();
@@ -118,39 +120,44 @@ export function CountryList() {
       >
         {data?.pages.map((page, pageIndex) => (
           <Fragment key={pageIndex}>
-            {page.data.map((country, countryIndex) => (
+            {page.data.map((country, index) => (
               <motion.div
-                key={countryIndex}
-                variants={item(countryIndex)}
-                className=" w-[95px]  "
+                key={index}
+                variants={item(index)}
+                className={`group w-[97px] ${
+                  index == countryIndex ? "bg-black" : "bg-white"
+                }  border border-[#ebdfdf] rounded-md overflow-hidden`}
               >
                 <div
                   onClick={() => {
                     router.push(
                       `/country/${country.name.common.toLowerCase()}`
                     );
+                    setCountryIndex(index);
                   }}
-                  className="transition duration-200 group"
+                  className="  transition duration-200 "
                 >
-                  <div className="w-full  h-[95px]   flex items-center overflow-hidden firstChild">
+                  <div className="w-full bg-[#c0c0c0] overflow-hidden h-[95px]   flex items-center   ">
                     <img src={country.flags.png} alt={country.name.common} />
                   </div>
 
-                  <p className="truncate mt-2 text-[#7B7B7B] font-semibold">
-                    {country.name.common}
-                  </p>
-                  <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
-                    <RiHome2Line color="#7B7B7B" />
-                    <p className="truncate">
-                      {country?.capital?.[0] ? country.capital[0] : "none"}
+                  <div className="mx-2">
+                    <p className="truncate mt-2 text-[#7B7B7B] font-semibold">
+                      {country.name.common}
                     </p>
-                  </div>
+                    <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
+                      <RiHome2Line color="#7B7B7B" />
+                      <p className="truncate">
+                        {country?.capital?.[0] ? country.capital[0] : "none"}
+                      </p>
+                    </div>
 
-                  <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
-                    <IoLocationOutline color="#7B7B7B" />
-                    <p className="truncate">
-                      {country?.region ? country.region : "none"}
-                    </p>
+                    <div className="grid grid-cols-[16px_1fr] items-center gap-1 text-[#7B7B7B]">
+                      <IoLocationOutline color="#7B7B7B" />
+                      <p className="truncate">
+                        {country?.region ? country.region : "none"}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>

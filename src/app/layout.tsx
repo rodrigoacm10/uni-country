@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { CountriesContextProvider } from "@/contexts/CountriesContext";
-import { QueryClientPro } from "@/contexts/QueryClient";
+import { PorvidersComponent } from "@/contexts/PorvidersComponent";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,14 +30,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f7f7f7] `}
       >
-        <QueryClientPro>
-          <CountriesContextProvider>
-            {children}
+        <PorvidersComponent>
+          {children}
 
-            {/* gradient  */}
-            <div className="fixed  bottom-0 left-0 bg-[linear-gradient(to_top,#DD7AFF__000000000001%,#f7f7f7_100%)] w-full z-10 h-[20vh]"></div>
-          </CountriesContextProvider>
-        </QueryClientPro>
+          {/* gradient  */}
+          <div className="fixed  bottom-0 left-0 bg-[linear-gradient(to_top,#DD7AFF__000000000001%,#f7f7f7_100%)] w-full z-10 h-[20vh]"></div>
+        </PorvidersComponent>
       </body>
     </html>
   );
