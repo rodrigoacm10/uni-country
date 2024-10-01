@@ -70,7 +70,7 @@ export default function Country({
         ""
       )}
       {/* <TracingBeam className="h-[200%] px-6"> */}
-      <div className="w-full  bg-[#e6e6e6] z-30 flex justify-center min-h-screen    p-10   relative ">
+      <div className="w-full  bg-[#f7f7f7] z-30 flex justify-center min-h-screen    p-10   relative ">
         <BackgroundStyled />
         {/* [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]  */}
 

@@ -133,7 +133,7 @@ export function CountryList() {
               >
                 <div className="relative ">
                   {index == countryIndex ? (
-                    <div className="absolute z-50 w-[95px] h-[181px] flex items-center justify-center  -bottom-[181px] right-0 bg-black bg-opacity-50  ">
+                    <div className="absolute z-50 w-[100px] h-[181px] flex items-center justify-center  -bottom-[181px] right-0 bg-black bg-opacity-50  ">
                       <FiLoader
                         className="animate-spin "
                         color="#7C05B5"
@@ -154,7 +154,7 @@ export function CountryList() {
                   }}
                   className="  transition duration-200 "
                 >
-                  <div className="w-full bg-[#c0c0c0] overflow-hidden h-[95px]   flex items-center   ">
+                  <div className="w-full bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 px-2 overflow-hidden h-[95px]   flex items-center   ">
                     <img src={country.flags.png} alt={country.name.common} />
                   </div>
 

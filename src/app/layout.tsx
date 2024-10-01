@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { PorvidersComponent } from "@/contexts/PorvidersComponent";
+import { BackgroundStyled } from "@/components/BackgroundStytled";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,11 +28,17 @@ export default function RootLayout({
   //
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/uni-country-icon.svg?v=1" sizes="any" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f7f7f7] `}
       >
         <PorvidersComponent>
           {children}
+          <div className="fixed bg-[#f7f7f7] bottom-0 left-0  w-full  h-[100vh]">
+            <BackgroundStyled />
+          </div>
 
           <div className="fixed  bottom-0 left-0 bg-[linear-gradient(to_top,#DD7AFF__000000000001%,#f7f7f7_100%)] w-full z-10 h-[20vh]"></div>
         </PorvidersComponent>
