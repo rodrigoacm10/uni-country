@@ -35,7 +35,8 @@ export default function RootLayout({
           <CountriesContextProvider>
             {children}
 
-            <div className="fixed  bottom-0 left-0 bg-[linear-gradient(to_top,_pink_2%,#f7f7f7_100%)] w-full z-10 h-[5vh]"></div>
+            {/* gradient  */}
+            <div className="fixed  bottom-0 left-0 bg-[linear-gradient(to_top,#DD7AFF__000000000001%,#f7f7f7_100%)] w-full z-10 h-[20vh]"></div>
           </CountriesContextProvider>
         </QueryClientPro>
       </body>

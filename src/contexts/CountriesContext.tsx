@@ -1,87 +1,37 @@
 "use client";
 
-import {
-  createContext,
-  ReactNode,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { createContext, ReactNode, useState } from "react";
 
-// Definindo a tipagem correta para o contexto
-interface SubRegionType {
-  value: string;
-  name: string;
-}
-
-interface RegionType {
-  value: string;
-  name: string;
-}
-
-interface CountriesContextType {
-  countrySearch: string;
-  setCountrySearch: Dispatch<SetStateAction<string>>;
-
-  subRegion: SubRegionType;
-  setSubRegion: Dispatch<SetStateAction<SubRegionType>>;
-
-  region: RegionType;
-  setRegion: Dispatch<SetStateAction<RegionType>>;
-
-  population: string;
-  setPopulation: Dispatch<SetStateAction<string>>;
-
-  nameOrde: boolean;
-  setNameOrder: Dispatch<SetStateAction<boolean>>;
-
-  populationOrderDesc: boolean;
-  setPopulationOrderDesc: Dispatch<SetStateAction<boolean>>;
-
-  populationOrderAsc: boolean;
-  setPopulationOrderAsc: Dispatch<SetStateAction<boolean>>;
-
-  areaOrde: boolean;
-  setAreaOrder: Dispatch<SetStateAction<boolean>>;
-
-  filtersVisible: boolean;
-  setFiltersVisible: Dispatch<SetStateAction<boolean>>;
-
-  ordenationVisible: boolean;
-  setOrdenationVisible: Dispatch<SetStateAction<boolean>>;
-}
-
-// Criando o contexto com tipagem correta
-export const CountriesContext = createContext<CountriesContextType>({
+// Criando o contexto corretamente
+export const CountriesContext = createContext({
   countrySearch: "",
-  setCountrySearch: () => {},
-
-  subRegion: { value: "", name: "" },
-  setSubRegion: () => {},
-
-  region: { value: "", name: "" },
-  setRegion: () => {},
-
+  setCountrySearch: (val: string) => {},
+  subRegion: {
+    value: "",
+    name: "",
+  },
+  setSubRegion: (val: any) => {},
+  region: {
+    value: "",
+    name: "",
+  },
+  setRegion: (val: any) => {},
   population: "",
-  setPopulation: () => {},
-
+  setPopulation: (val: string) => {},
   nameOrde: false,
-  setNameOrder: () => {},
-
+  setNameOrder: (val: boolean) => {},
   populationOrderDesc: false,
-  setPopulationOrderDesc: () => {},
-
+  setPopulationOrderDesc: (val: boolean) => {},
   populationOrderAsc: false,
-  setPopulationOrderAsc: () => {},
-
+  setPopulationOrderAsc: (val: boolean) => {},
   areaOrde: false,
-  setAreaOrder: () => {},
-
+  setAreaOrder: (val: boolean) => {},
   filtersVisible: false,
-  setFiltersVisible: () => {},
-
+  setFiltersVisible: (val: boolean) => {},
   ordenationVisible: false,
-  setOrdenationVisible: () => {},
+  setOrdenationVisible: (val: boolean) => {},
+  countryIndex: -1,
+  setCountryIndex: (val: number) => {},
 });
 
 interface CountriesContextProviderProps {
@@ -91,22 +41,20 @@ interface CountriesContextProviderProps {
 export function CountriesContextProvider({
   children,
 }: CountriesContextProviderProps) {
-  const [countrySearch, setCountrySearch] = useState<string>("");
-  const [subRegion, setSubRegion] = useState<SubRegionType>({
-    value: "",
-    name: "",
-  });
-  const [region, setRegion] = useState<RegionType>({ value: "", name: "" });
-  const [population, setPopulation] = useState<string>("none");
-  const [nameOrde, setNameOrder] = useState<boolean>(false);
-  const [populationOrderDesc, setPopulationOrderDesc] =
-    useState<boolean>(false);
-  const [populationOrderAsc, setPopulationOrderAsc] = useState<boolean>(false);
-  const [areaOrde, setAreaOrder] = useState<boolean>(false);
-  const [filtersVisible, setFiltersVisible] = useState<boolean>(false);
-  const [ordenationVisible, setOrdenationVisible] = useState<boolean>(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [subRegion, setSubRegion] = useState({ value: "", name: "" });
+  const [region, setRegion] = useState({ value: "", name: "" });
+  const [population, setPopulation] = useState("none");
+  const [nameOrde, setNameOrder] = useState(false);
+  const [populationOrderDesc, setPopulationOrderDesc] = useState(false);
+  const [populationOrderAsc, setPopulationOrderAsc] = useState(false);
+  const [areaOrde, setAreaOrder] = useState(false);
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [ordenationVisible, setOrdenationVisible] = useState(false);
+  const [countryIndex, setCountryIndex] = useState(-1);
 
   return (
+    // Corrigido para acessar o provider corretamente
     <CountriesContext.Provider
       value={{
         countrySearch,
@@ -129,6 +77,8 @@ export function CountriesContextProvider({
         setFiltersVisible,
         ordenationVisible,
         setOrdenationVisible,
+        countryIndex,
+        setCountryIndex,
       }}
     >
       {children}
