@@ -22,7 +22,6 @@ export function SelectComport({
   value,
   setValue,
   arrValues,
-  // especif,
   setEspecific,
   text,
   findText,
@@ -33,7 +32,6 @@ export function SelectComport({
   value: string;
   setValue: (val: string) => void;
   arrValues: NameVal[];
-  // especif: any;
   setEspecific: (val: NameVal) => void;
   text: string;
   findText: string;
@@ -87,13 +85,11 @@ export function SelectComport({
                   key={framework.value}
                   value={framework.name}
                   onSelect={(currentValue: string) => {
-                    console.log(currentValue);
                     const selectSubReg = arrValues.find(
                       (cli) => cli.name == currentValue
                     );
                     setOpen(false);
                     close ? close(false) : "";
-                    console.log(selectSubReg);
                     setEspecific(selectSubReg || { name: "", value: "" });
 
                     setValue(currentValue === value ? "" : currentValue);

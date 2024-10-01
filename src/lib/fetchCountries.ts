@@ -25,8 +25,6 @@ export const fetchCountries = async ({
   const populationOrderAsc = queryKey[7];
   const areaOrde = queryKey[8];
 
-  console.log("population", population);
-
   const response: AxiosResponse<Country[]> = await axios.get(
     search
       ? `https://restcountries.com/v3.1/name/${search}`
@@ -62,7 +60,6 @@ export const fetchCountries = async ({
     stringToBoolean(areaOrde)
   );
   const paginatedData = sortedData.slice(start, start + itemsPerPage);
-  // const paginatedData = response.data.slice(start, start + itemsPerPage);
 
   return {
     data: paginatedData,

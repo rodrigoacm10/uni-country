@@ -101,8 +101,6 @@ export function CountryList() {
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  console.log(data?.pages[0].data);
-
   return (
     <div className="w-full">
       {status === "error" && (
@@ -113,6 +111,10 @@ export function CountryList() {
         <p className="flex justify-center w-full mt-32">
           <FiLoader className="animate-spin" size={26} />
         </p>
+      )}
+
+      {data?.pages[0].data.length === 0 && (
+        <p className="text-center mt-32 font-bold">Nenhum país encontrado</p>
       )}
 
       <motion.div

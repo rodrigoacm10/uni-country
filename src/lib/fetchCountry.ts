@@ -6,8 +6,6 @@ export const fetchCountry = async (name: string) => {
     `https://restcountries.com/v3.1/name/${name}?fullText=true`
   );
 
-  console.log(response.data);
-
   return {
     results: response.data as Country[],
   };

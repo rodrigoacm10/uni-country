@@ -1,6 +1,4 @@
 export const corPopuation = (val: string) => {
-  console.log(val);
-
   if (val === "none") {
     return { type: "none", min: 0, max: 0 };
   } else if (val === "1m") {

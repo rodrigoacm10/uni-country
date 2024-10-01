@@ -36,8 +36,6 @@ export default function Country({
 
   const { data, isFetching } = useCountry(params.countryName);
 
-  console.log(data);
-
   const country = data?.results[0];
 
   const languages = country?.languages ? Object.values(country.languages) : [];
