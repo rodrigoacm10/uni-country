@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 export function InfosLi({
   children,
@@ -6,7 +6,7 @@ export function InfosLi({
   title,
 }: {
   children: ReactNode;
-  icon: string;
+  icon: ReactElement;
   title: string;
 }) {
   return (

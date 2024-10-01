@@ -11,6 +11,17 @@ import { useContext } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
 
+import { IoLocationOutline } from "react-icons/io5";
+import { RiHome2Line } from "react-icons/ri";
+import { BsTelephone } from "react-icons/bs";
+import { SiTldraw } from "react-icons/si";
+import { BsChatLeftDots } from "react-icons/bs";
+import { CiMoneyBill } from "react-icons/ci";
+import { PiMapPinArea } from "react-icons/pi";
+import { PrinciInfosLi } from "@/components/PrinciInfosLi";
+import { IoEarthOutline } from "react-icons/io5";
+import { GoPeople } from "react-icons/go";
+
 export default function Country({
   params,
 }: {
@@ -48,8 +59,17 @@ export default function Country({
 
   return (
     <>
+      {isFetching ? (
+        <div className="w-full z-50 fixed   top-0 right-0 h-full flex items-center justify-center">
+          <p className=" flex justify-center w-full mt-32">
+            <FiLoader className="animate-spin" size={26} />
+          </p>
+        </div>
+      ) : (
+        ""
+      )}
       {/* <TracingBeam className="h-[200%] px-6"> */}
-      <div className="w-full  bg-[#f7f7f7] z-30 flex justify-center min-h-screen    p-10   relative ">
+      <div className="w-full  bg-[#e6e6e6] z-30 flex justify-center min-h-screen    p-10   relative ">
         <BackgroundStyled />
         {/* [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]  */}
 
@@ -83,9 +103,7 @@ export default function Country({
                 </div>
                 <div className="       ">
                   {isFetching ? (
-                    <p className="flex justify-center w-full mt-32">
-                      <FiLoader className="animate-spin" size={26} />
-                    </p>
+                    ""
                   ) : (
                     <>
                       {" "}
@@ -98,32 +116,37 @@ export default function Country({
                         </h3>
                       </div>
                       <ul className=" flex flex-col gap-1 mt-2">
-                        <li className="flex md:text-[18px] text-[16px] text-[#7B7B7B] font-semibold items-center gap-2">
-                          <span>bb</span> {country?.area} km²
-                        </li>
-                        <li className="flex md:text-[18px] text-[16px] text-[#7B7B7B] font-semibold items-center gap-2">
-                          <span>bb</span>
-                          {country?.population}
-                        </li>
-                        <li className="flex md:text-[18px] text-[16px] text-[#7B7B7B] font-semibold items-start gap-2">
-                          <span>bb</span>
-                          <div className="grid lit:grid-cols-3 grid-cols-2 gap-x-2">
-                            {country?.timezones.map((e, i) => {
-                              if (i === country.timezones.length - 1) {
-                                return <p key={i}> {e}</p>;
-                              } else {
-                                return <p key={i}>{e}, </p>;
-                              }
-                            })}
-                          </div>
-                        </li>
+                        <PrinciInfosLi
+                          icon={<IoEarthOutline />}
+                          title={`${country?.area} km²`}
+                        />
+
+                        <PrinciInfosLi
+                          icon={<GoPeople />}
+                          title={`${country?.population}`}
+                        />
+
+                        <PrinciInfosLi
+                          icon={<GoPeople />}
+                          component={
+                            <div className="grid lit:grid-cols-3 grid-cols-2 gap-x-2">
+                              {country?.timezones.map((e, i) => {
+                                if (i === country.timezones.length - 1) {
+                                  return <p key={i}> {e}</p>;
+                                } else {
+                                  return <p key={i}>{e}, </p>;
+                                }
+                              })}
+                            </div>
+                          }
+                        />
                       </ul>
                       <h3 className="py-6 text-[16px] font-semibold">
                         Informações gerais
                       </h3>
                       <div className="flex gap-x-10 flex-col gap-5">
                         <ul className=" gap-x-4 grid grid-cols-2    mt-2 max-w-[400px]">
-                          <InfosLi icon={"DD"} title={"discagem"}>
+                          <InfosLi icon={<BsTelephone />} title={"discagem"}>
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              flex items-center">
                               {country?.idd?.root || "---"}
                               {country?.idd?.suffixes?.map((e, i) => (
@@ -132,7 +155,7 @@ export default function Country({
                             </p>
                           </InfosLi>
 
-                          <InfosLi icon={"DD"} title={"TLD"}>
+                          <InfosLi icon={<SiTldraw />} title={"TLD"}>
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
                               {country?.tld || "---"}
                             </p>
@@ -140,19 +163,22 @@ export default function Country({
                         </ul>
 
                         <ul className="gap-x-4  leading-[26px] grid grid-cols-2 sm:grid-cols-3 gap-y-6 mt-2 max-w-[400px]">
-                          <InfosLi icon={"DD"} title={"capital"}>
+                          <InfosLi icon={<RiHome2Line />} title={"capital"}>
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
                               {country?.capital || "---"}
                             </p>
                           </InfosLi>
 
-                          <InfosLi icon={"DD"} title={"region"}>
+                          <InfosLi
+                            icon={<IoLocationOutline />}
+                            title={"region"}
+                          >
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
                               {country?.region || "---"}
                             </p>
                           </InfosLi>
 
-                          <InfosLi icon={"DD"} title={"sub-region"}>
+                          <InfosLi icon={<PiMapPinArea />} title={"sub-region"}>
                             <p className="md:text-[15px] text-[13px] lit:pl-[30px] pt-2              font-">
                               {country?.subregion || "---"}
                             </p>
@@ -160,7 +186,7 @@ export default function Country({
                         </ul>
 
                         <ul className="gap-x-4  leading-[26px] grid grid-cols-2 mt-2 max-w-[400px]">
-                          <InfosLi icon={"DD"} title={"Idiomas"}>
+                          <InfosLi icon={<BsChatLeftDots />} title={"Idiomas"}>
                             {languages.length > 0
                               ? languages.map((e, i) => {
                                   return (
@@ -175,7 +201,7 @@ export default function Country({
                               : "---"}
                           </InfosLi>
 
-                          <InfosLi icon={"DD"} title={"Moedas"}>
+                          <InfosLi icon={<CiMoneyBill />} title={"Moedas"}>
                             {currencies.length > 0
                               ? currencies.map((e, i) => {
                                   return (

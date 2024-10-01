@@ -124,10 +124,22 @@ export function CountryList() {
               <motion.div
                 key={index}
                 variants={item(index)}
-                className={`group w-[97px] ${
-                  index == countryIndex ? "bg-black" : "bg-white"
-                }  border border-[#ebdfdf] rounded-md overflow-hidden`}
+                className={`group w-[97px]  bg-white  border border-[#ebdfdf] rounded-md overflow-hidden    `}
               >
+                <div className="relative ">
+                  {index == countryIndex ? (
+                    <div className="absolute z-50 w-[95px] h-[181px] flex items-center justify-center  -bottom-[181px] right-0 bg-black bg-opacity-50  ">
+                      <FiLoader
+                        className="animate-spin "
+                        color="#7C05B5"
+                        size={26}
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
                 <div
                   onClick={() => {
                     router.push(
@@ -141,7 +153,7 @@ export function CountryList() {
                     <img src={country.flags.png} alt={country.name.common} />
                   </div>
 
-                  <div className="mx-2">
+                  <div className="mx-2 mb-1">
                     <p className="truncate mt-2 text-[#7B7B7B] font-semibold">
                       {country.name.common}
                     </p>
